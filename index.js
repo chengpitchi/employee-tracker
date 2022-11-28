@@ -176,12 +176,12 @@ const showMainMenu = (async() => {
                                     VALUES (?, ?, (SELECT id FROM role WHERE title = ?), 
                                     (SELECT e.id FROM employee e WHERE CONCAT(e.first_name, ' ', e.last_name) = ?))`; 
 
-                        db.query(sql, [response.firstName, response.lastName, response.role, response.manager], (err, result) => {
+                        db.query(sql, [response.firstName.trim(), response.lastName.trim(), response.role, response.manager], (err, result) => {
                             console.log('\n'); 
                             if (err) {
                                 console.log(`Error: ${err.sqlMessage}`); 
                             } else {
-                                console.log(`Employee "${response.firstName} ${response.lastName}" added to the database.`)
+                                console.log(`Employee "${response.firstName.trim()} ${response.lastName.trim()}" added to the database.`)
                             }
                             showMainMenu();  
                         })    
